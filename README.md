@@ -18,6 +18,73 @@ You can start editing the page by modifying `app/page.js`. The page auto-updates
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Render
+
+It rende on layout file that have page.js
+
+## Routing
+
+Inside root folder(where layout and page there), create directory and name it according to name of your endpoint and create page.js file
+
+or
+
+Create javascript file inside root folder and name it according to name of your endpoint
+
+## Dynamic Routing
+
+Create [name] directory and create page.js
+
+## Get Parameter from url
+
+Insert {params} inside
+
+Ex
+```js
+import React from "react";
+import Repos from "@/app/components/Repos";
+import { Suspense } from "react";
+const page = ({ params }) => {
+  console.log(params.name);
+  return (
+    <div className="repos-singular">
+      <Suspense fallback={<h1>LOADING...</h1>}>
+        <Repos name={params.name} type="link" />
+      </Suspense>
+    </div>
+  );
+};
+
+export default page;
+```
+
+## Using Promise
+
+Create async function inside React Hook component (useEffect, useCallback) and then call it inside Hook function
+
+Ex:
+```js
+.....
+ useEffect(() => {
+    // Create async function as workaround to promise
+    // If I not do it, next will fetching twice every render
+    async function invoke() {
+      const output = await getData(link, "http://127.0.0.1:8000/results");
+      setData(output);
+      console.log("output:",output)
+    }
+    // If data is empty
+    if (!data.length) {
+      invoke()
+      console.log(data)
+    }
+  });
+.....
+```
+
+# Tips for React
+
+- Use React Hook Component to avoid re-rendering problem
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
